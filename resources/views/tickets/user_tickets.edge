@@ -1,0 +1,61 @@
+@layout('layouts.master')
+
+@section('content')
+    @set('title', 'My Tickets')
+
+    <div class="columns">
+        <div class="column is-10-tablet is-offset-1">
+            <header class="card-header">
+                <p class="card-header-title">
+                    My Tickets
+                </p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+
+                    @if(tickets.length == 0)
+                        <p> You have not created any tickets. </p>
+                    @else
+                        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @each(ticket in tickets)
+                                    <tr>
+                                        <td>
+                                            @each(category in categories)
+                                              @if(category.id == ticket.category_id)
+                                                {{category.name}}
+                                              @endif
+                                            @endeach
+                                        </td>
+                                        <td>
+                                            <a href="tickets/{{ ticket.ticket_id }}">
+                                                #{{ ticket.ticket_id }} - {{ ticket.title }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if(ticket.status == 'Open')
+                                                <span class="tag is-success">{{ ticket.status }}</span>
+                                            @else
+                                                <span class="tag is-danger">{{ ticket.status }}</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ ticket.updated_at }}</td>
+                                    </tr>
+                                @endeach
+                            </tbody>
+                        </table>
+                    @endif
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

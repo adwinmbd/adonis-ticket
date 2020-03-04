@@ -1,0 +1,89 @@
+@layout('layouts.master')
+
+@section('content')
+  
+  @set('title', 'Open Ticket')
+
+  <div class="columns">
+      <div class="column is-10-tablet is-offset-1">
+          <div class="card">
+              <header class="card-header">
+                  <p class="card-header-title">
+                      Open a new Ticket
+                  </p>
+              </header>
+              <div class="card-content">
+                  <div class="content">
+                      @include('partials.notification')
+
+                      <form action="/new_ticket" method="post">
+                        {{ csrfField() }}
+            
+                        <div class="field">
+                          <label class="label">Title</label>
+            
+                          <div class="control">
+                            <input
+                              type="text"
+                              class="input{{ hasErrorFor('title') ? ' is-danger' : '' }}"
+                              name="title"
+                              value="{{ old('title', '') }}"
+                            >
+                          </div>
+            
+                          {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
+                        </div>
+
+                        <div class="field">
+                          <label class="label">Category</label>
+            
+                          <div class="control">
+                            <div class="select is-fullwidth">
+                              <select name="category">
+                                <option value="">Choose a category</option>
+                                @each((name, id) in categories)
+                                  <option value="{{ id }}">{{ name }}</option>
+                                @endeach
+                              </select>
+                            </div>
+                          </div>
+            
+                          {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('category'), hasErrorFor('category')) }}
+                        </div>
+
+                        <div class="field">
+                          <label class="label">Priority</label>
+            
+                          <div class="control">
+                            <div class="select is-fullwidth">
+                              <select name="priority">
+                                <option value="">Select a priority ...</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                              </select>
+                            </div>
+                          </div>
+                          {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('priority'), hasErrorFor('priority')) }}
+                        </div>
+
+                        <div class="field">
+                          <label class="label">Message</label>
+                          <div class="control">
+                            <textarea class="textarea" placeholder="Textarea" rows="10" name="message"></textarea>
+                          </div>
+                          {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('message'), hasErrorFor('message')) }}
+                        </div>
+
+                        <div class="control">
+                          <button type="submit" class="button is-primary is-fullwidth">
+                              Open Ticket
+                          </button>
+                        </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+@endsection

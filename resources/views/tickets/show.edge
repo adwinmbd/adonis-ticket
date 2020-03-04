@@ -1,0 +1,78 @@
+@layout('layouts.master')
+
+@section('content')
+    @set('title', ticket.title )
+
+    <div class="columns">
+        <div class="column is-10-tablet is-offset-1">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        #{{ ticket.ticket_id }} - {{ ticket.title }}
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        @include('partials.notification')
+
+                        <div class="ticket-info">
+                            <p>{{ ticket.message }}</p>
+                            <p>Category: {{ category.name }}</p>
+                            <p>
+                            @if(ticket.status == 'Open')
+                                Status: <span class="tag is-success">{{ ticket.status }}</span>
+                            @else
+                                Status: <span class="tag is-danger">{{ ticket.status }}</span>
+                            @endif
+                            </p>
+                            <p>Created on: {{ ticket.created_at }}</p>
+                        </div>
+                        <hr>
+
+                        <div class="comments">
+                            @each(comment in comments)
+                              
+                            <div
+                                {{--class="card has-background-{{'light' if ticket.user.user.id == comment.user_id else 'success'}}">--}} 
+                                class="card has-background-danger">
+                                  <header class="card-header">
+                                    <p class="card-header-title">
+                                        {{comment.user.username}}
+                                        <span class="is-pulled-right">{{comment.created_at}}</span>
+                                    </p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        {{ comment.comment }}
+                                    </div>
+                                </div>
+                              </div>
+                            @endeach
+                        </div>
+
+                        <div class="comment-form">
+
+                            <form action="/comment" method="post">
+                                {{ csrfField() }}
+                                
+                                <input type="hidden" name="ticket_id" value="{{ ticket.id }}">
+
+                                <div class="field">
+                                    <label class="label">Message</label>
+                                    <div class="control">
+                                      <textarea class="textarea" placeholder="Textarea" rows="10" name="comment"></textarea>
+                                    </div>
+                                    {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('comment'), hasErrorFor('comment')) }}
+                                  </div>
+                        
+                                <div class="control">
+                                    <button type="submit" class="button is-primary is-fullwidth">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

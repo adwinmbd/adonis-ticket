@@ -1,0 +1,70 @@
+@layout('layouts.master')
+@section('content')
+    @set('title', 'All Tickets')
+
+    <div class="column is-10-tablet is-offset-1">
+        <header class="card-header">
+            <p class="card-header-title">
+                Tickets
+            </p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+
+                @if(tickets.length == 0)
+                    <p> There are currently no tickets. </p>
+                @else
+                    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Last Updated</th>
+                                <th style="text-align:center;" colspan="2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @each(ticket in tickets)
+                                <tr>
+                                    <td>
+                                        @each(category in categories)
+                                            @if(category.id == ticket.category_id)
+                                                {{category.name}}
+                                            @endif
+                                        @endeach
+                                    </td>
+                                    <td>
+                                        <a href="tickets/{{ ticket.ticket_id }}">
+                                            #{{ ticket.ticket_id }} - {{ ticket.title }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @if(ticket.status == 'Open')
+                                            <span class="tag is-success">{{ ticket.status }}</span>
+                                        @else
+                                            <span class="tag is-danger">{{ ticket.status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ ticket.updated_at }}</td>
+                                    <td>
+                                        <a href="/tickets/{{ ticket.ticket_id }}" class="button is-primary">Comment</a>
+                                    </td>
+                                    <td>
+                                        <!--({ url: '/admin/close_ticket/' + ticket.ticket_id, method: 'POST' })-->
+                                        <form action="/admin/close_ticket/"+ticket.ticket_id method="post">
+                                            {{ csrfField }}
+                                            <button type="button" class="button is-danger">
+                                                Close
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
+    </div>
+@endsection
