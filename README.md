@@ -1,4 +1,4 @@
-# ADOTKT
+# Adonis Ticketing
 
 > Basic ticketing app built with Adonisjs.
 
