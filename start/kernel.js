@@ -17,7 +17,7 @@ const globalMiddleware = [
   "Adonis/Middleware/Session",
   "Adonis/Middleware/Shield",
   "Adonis/Middleware/AuthInit",
-  "App/Middleware/ConvertEmptyStringsToNull"
+  "App/Middleware/ConvertEmptyStringsToNull",
 ];
 
 /*
@@ -40,7 +40,7 @@ const globalMiddleware = [
 const namedMiddleware = {
   auth: "Adonis/Middleware/Auth",
   guest: "Adonis/Middleware/AllowGuestOnly",
-  admin: "App/Http/Middleware/Admin"
+  admin: "App/Middleware/Admin",
 };
 
 /*
