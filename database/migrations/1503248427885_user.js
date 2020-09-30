@@ -5,21 +5,12 @@ const Schema = use("Schema");
 
 class UserSchema extends Schema {
   up() {
-    this.create("users", table => {
+    this.create("users", (table) => {
       table.increments();
-      table
-        .string("username", 80)
-        .notNullable()
-        .unique();
-      table
-        .string("email", 254)
-        .notNullable()
-        .unique();
+      table.string("username", 80).notNullable().unique();
+      table.string("email", 254).notNullable().unique();
       table.string("password", 60).notNullable();
-      table
-        .string("is_admin")
-        .unsigned()
-        .default(0);
+      table.boolean("is_admin").default(0);
       table.timestamps();
     });
   }
