@@ -18,7 +18,7 @@ class TicketController {
     // return tickets
     return view.render("tickets.index", {
       tickets: tickets.toJSON(),
-      categories: categories.toJSON()
+      categories: categories.toJSON(),
     });
   }
 
@@ -27,14 +27,12 @@ class TicketController {
    */
   async userTickets({ auth, view }) {
     const user = auth.user;
-    const tickets = await Ticket.query()
-      .where("user_id", user.id)
-      .fetch();
+    const tickets = await Ticket.query().where("user_id", user.id).fetch();
     const categories = await Category.all();
 
     return view.render("tickets.user_tickets", {
       tickets: tickets.toJSON(),
-      categories: categories.toJSON()
+      categories: categories.toJSON(),
     });
   }
 
@@ -58,11 +56,11 @@ class TicketController {
       title: "required",
       category: "required",
       priority: "required",
-      message: "required"
+      message: "required",
     };
 
     const randomString = [...Array(12)]
-      .map(i => (~~(Math.random() * 36)).toString(36).toUpperCase())
+      .map((i) => (~~(Math.random() * 36)).toString(36).toUpperCase())
       .join("");
 
     const userData = request.all();
@@ -91,11 +89,11 @@ class TicketController {
       category_id: request.input("category"),
       priority: request.input("priority"),
       message: request.input("message"),
-      status: "Open"
+      status: "Open",
     });
 
     // send mail notification
-    await Mail.send("emails.ticket_info", { user, ticket }, message => {
+    await Mail.send("emails.ticket_info", { user, ticket }, (message) => {
       message.to(user.email, user.username);
       message.from("support@adotiksm.dev");
       message.subject(`[Ticket ID: ${ticket.ticket_id}] ${ticket.title}`);
@@ -109,8 +107,8 @@ class TicketController {
     session.flash({
       notification: {
         type: "success",
-        message: `A ticket with ID: #${ticket.ticket_id} has been opened.`
-      }
+        message: `A ticket with ID: #${ticket.ticket_id} has been opened.`,
+      },
     });
     response.redirect("back");
   }
@@ -132,16 +130,13 @@ class TicketController {
       .with("user")
       .fetch();
     return ticket;*/
-    const comments = await ticket
-      .comments()
-      .with("user")
-      .fetch();
+    const comments = await ticket.comments().with("user").fetch();
     const category = await ticket.category().fetch();
 
     return view.render("tickets.show", {
       ticket: ticket.toJSON(),
       comments: comments.toJSON(),
-      category: category.toJSON()
+      category: category.toJSON(),
     });
   }
 

@@ -17,8 +17,6 @@
 const Route = use("Route");
 
 Route.on("/").render("home").as("home");
-// Route.on("/home").render("home").as("home");
-//Route.get('/home', 'HomeController.index').as('home')
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +36,10 @@ Route.get("logout", "AuthController.logout");
 |--------------------------------------------------------------------------
 */
 // Route.get("new_ticket", "TicketsController.create").middleware("auth");
-Route.get("new_ticket", "TicketsController.create");
-Route.post("new_ticket", "TicketsController.store");
+Route.get("new/ticket", "TicketsController.create");
+Route.post("new/ticket", "TicketsController.store");
 Route.get("tickets/:ticket_id", "TicketsController.show");
-Route.get("my_tickets", "TicketsController.userTickets");
+Route.get("user/tickets", "TicketsController.userTickets");
 
 Route.post("comment", "CommentsController.postComment");
 
@@ -52,7 +50,7 @@ Route.post("comment", "CommentsController.postComment");
 */
 Route.group(() => {
   Route.get("tickets", "TicketsController.index");
-  Route.post("close_ticket/:ticket_id", "TicketsController.close");
+  Route.post("close/ticket/:ticket_id", "TicketsController.close");
 })
   .prefix("admin")
   .middleware(["auth", "admin"]);

@@ -1,7 +1,7 @@
 @layout('layouts.master')
 
 @section('content')
-  
+
   @set('title', 'Open Ticket')
 
   <div class="columns">
@@ -16,12 +16,12 @@
                   <div class="content">
                       @include('partials.notification')
 
-                      <form action="/new_ticket" method="post">
+                      <form action="/new/ticket" method="post">
                         {{ csrfField() }}
-            
+
                         <div class="field">
                           <label class="label">Title</label>
-            
+
                           <div class="control">
                             <input
                               type="text"
@@ -30,13 +30,13 @@
                               value="{{ old('title', '') }}"
                             >
                           </div>
-            
+
                           {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('title'), hasErrorFor('title')) }}
                         </div>
 
                         <div class="field">
                           <label class="label">Category</label>
-            
+
                           <div class="control">
                             <div class="select is-fullwidth">
                               <select name="category">
@@ -47,13 +47,13 @@
                               </select>
                             </div>
                           </div>
-            
+
                           {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('category'), hasErrorFor('category')) }}
                         </div>
 
                         <div class="field">
                           <label class="label">Priority</label>
-            
+
                           <div class="control">
                             <div class="select is-fullwidth">
                               <select name="priority">

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  {{-- Meta Information --}}
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name=viewport content="width=device-width, initial-scale=1">
+  <head>
+    {{-- Meta Information --}}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name=viewport content="width=device-width, initial-scale=1">
 
-  {{-- Title --}}
-<title>Adonis - {{title}}</title>
+    {{-- Title --}}
+    <title>Adonis - {{title}}</title>
 
-  {{-- CSS --}}
-  {{ style('bulma') }}
-  {{ style('global') }}
-</head>
+    {{-- CSS --}}
+    {{ style('bulma') }}
+    <style>
+      overflow-x: hidden;
+    </style>
+  </head>
   <body>
 
     @include('partials.navbar')
@@ -22,8 +24,5 @@
           @!section('content')
       </div>
     </section>
-
-    {{-- Scripts --}}
-    {{ script('/app.js') }}
   </body>
 </html>
