@@ -38,7 +38,7 @@ Route.get("logout", "AuthController.logout");
 // Route.get("new_ticket", "TicketsController.create").middleware("auth");
 Route.get("new/ticket", "TicketsController.create");
 Route.post("new/ticket", "TicketsController.store");
-Route.get("tickets/:ticket_id", "TicketsController.show");
+Route.get("user/tickets/:ticket_id", "TicketsController.show");
 Route.get("user/tickets", "TicketsController.userTickets");
 
 Route.post("comment", "CommentsController.postComment");

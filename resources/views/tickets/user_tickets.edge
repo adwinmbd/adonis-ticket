@@ -30,7 +30,7 @@
                                     <tr>
                                         <td>
                                             @each(category in categories)
-                                              @if(category.id == ticket.category_id)
+                                              @if(category.id == $parent.ticket.category_id)
                                                 {{category.name}}
                                               @endif
                                             @endeach
