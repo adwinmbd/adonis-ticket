@@ -16,10 +16,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use("Route");
 
-Route.on("/").render("welcome");
-Route.on("/home")
-  .render("home")
-  .as("home");
+Route.on("/").render("home").as("home");
+// Route.on("/home").render("home").as("home");
 //Route.get('/home', 'HomeController.index').as('home')
 
 /*

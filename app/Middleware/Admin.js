@@ -14,7 +14,7 @@ class Admin {
     // call next to advance the request
     await auth.check();
     if (auth.user.is_admin !== 1) {
-      response.redirect("/home");
+      response.redirect("/");
     }
     await next();
   }
