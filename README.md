@@ -66,6 +66,7 @@ $ adonis serve --dev
 ### To-Do
 
 - [ ] Fix unable to comment bug
+- [ ] Fix invalid login exceptions
 - [ ] Fix ticket link sent via e-mail
 - [ ] Fix navbar extending over viewport
 - [ ] Fix variables appearing in admin actions column

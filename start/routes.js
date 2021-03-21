@@ -39,7 +39,7 @@ Route.get("logout", "AuthController.logout");
 Route.get("new/ticket", "TicketsController.create").middleware("auth");
 Route.post("new/ticket", "TicketsController.store").middleware("auth");
 Route.get("user/tickets", "TicketsController.userTickets").middleware("auth");
-Route.get("user/tickets/:ticket_id", "TicketsController.show");
+Route.get("tickets/:ticket_id", "TicketsController.show").middleware("auth");
 
 Route.post("comment", "CommentsController.postComment").middleware("auth");
 
@@ -50,9 +50,10 @@ Route.post("comment", "CommentsController.postComment").middleware("auth");
 */
 Route.group(() => {
   // Route.get("tickets", "TicketsController.index");
+  Route.get("tickets", "TicketsController.index");
   Route.post("close/ticket/:ticket_id", "TicketsController.close");
 })
   .prefix("admin")
   .middleware(["auth", "admin"]);
 
-Route.get("tickets", "TicketsController.index");
+//Route.get("admin/tickets", "TicketsController.index");
