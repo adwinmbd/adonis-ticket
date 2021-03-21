@@ -62,3 +62,12 @@ Finally, start the application:
 ```bash
 $ adonis serve --dev
 ```
+
+### To-Do
+
+- [ ] Fix unable to comment bug
+- [ ] Fix ticket link sent via e-mail
+- [ ] Fix navbar extending over viewport
+- [ ] Fix variables appearing in admin actions column
+
+&#9888; This project is not finished. It is work in progress **(WIP)!** &#9888;
