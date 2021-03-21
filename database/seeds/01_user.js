@@ -24,14 +24,14 @@ class UserSeeder {
         is_admin: 1,
       },
       {
-        username: "lian",
-        email: "lian@email.com",
-        password: "lianwan",
+        username: "liana",
+        email: "liana@email.com",
+        password: "lianawan",
       },
       {
-        username: "binta",
-        email: "binta@email.com",
-        password: "bintawan",
+        username: "damian",
+        email: "damian@email.com",
+        password: "damianwan",
       },
     ];
     await User.createMany(users);
