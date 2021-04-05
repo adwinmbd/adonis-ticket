@@ -8,7 +8,7 @@ class CommentsController {
   /**
    * Persist comment and mail user
    */
-  async postComment({ auth, response, session }) {
+  async postComment({ auth, response, request, session }) {
     const userData = request.only(["comment"]);
     const user = auth.user;
     const rules = {

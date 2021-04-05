@@ -31,13 +31,14 @@
 
                         <div class="comments">
                             @each(comment in comments)
-                              
-                            <div
-                                {{--class="card has-background-{{'light' if ticket.user.user.id == comment.user_id else 'success'}}">--}} 
-                                class="card has-background-danger">
+                              @if(ticket.user_id === comment.user_id)
+                                <div class="card has-background-grey-lighter">
+                              @else
+                              <div class="card has-background-grey-light">
+                              @endif
                                   <header class="card-header">
                                     <p class="card-header-title">
-                                        {{comment.user.username}}
+                                        {{comment.user.username}}&nbsp;
                                         <span class="is-pulled-right">{{comment.created_at}}</span>
                                     </p>
                                 </header>
@@ -54,17 +55,18 @@
 
                             <form action="/comment" method="post">
                                 {{ csrfField() }}
-                                
+
                                 <input type="hidden" name="ticket_id" value="{{ ticket.id }}">
 
                                 <div class="field">
                                     <label class="label">Message</label>
                                     <div class="control">
-                                      <textarea class="textarea" placeholder="Textarea" rows="10" name="comment"></textarea>
+                                      <textarea class="textarea" placeholder="Textarea" rows="10" name="comment">
+                                      </textarea>
                                     </div>
                                     {{ elIf('<p class="help is-danger">$self</p>', getErrorFor('comment'), hasErrorFor('comment')) }}
                                   </div>
-                        
+
                                 <div class="control">
                                     <button type="submit" class="button is-primary is-fullwidth">Submit</button>
                                 </div>
